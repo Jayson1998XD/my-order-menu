@@ -16,13 +16,21 @@ import History from './components/about/History'
 import OrderingGuide from './components/about/OrderingGuide'
 
 
+//三级路由
+import PersonName from './components/about/contact/PersonName'
+import Phone from './components/about/contact/Phone'
+
+
 Vue.use(VueRouter)
 
 const routes = [
   {path:'/',name:'homeLink' ,component:Home},
   {path:'/menu',name:'menuLink' ,component:Menu},
-  {path:'/about',name:'aboutLink' ,component:About,children:[
-    {path:'/about/contact',name:"contactLink",component:Contact},
+  {path:'/about',name:'aboutLink' ,component:About,redirect:'/about/contact',children:[
+    {path:'/about/contact',name:"contactLink",component:Contact,children:[
+        {path:'/phone',name:'phoneNumber',component:Phone},
+        {path:'/personName',name:'personName',component:PersonName}
+    ]},
     {path:'/delivery',name:"deliveryLink",component:Delivery},
     {path:'/history',name:"historyLink",component:History},
     {path:'/orderingGuide',name:"orderingGuideLink",component:OrderingGuide}
