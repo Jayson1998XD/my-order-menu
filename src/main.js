@@ -1,49 +1,27 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
-
-import Home from './components/Home'
-import Menu from './components/Menu'
-import Admin from './components/Admin'
-import About from './components/about/About'
-import Login from './components/Login'
-import Register from './components/Register'
-
-//二级路由
-import Contact from './components/about/Contact'
-import Delivery from './components/about/Delivery'
-import History from './components/about/History'
-import OrderingGuide from './components/about/OrderingGuide'
-
-
-//三级路由
-import PersonName from './components/about/contact/PersonName'
-import Phone from './components/about/contact/Phone'
-
+import {routes} from './routes'
+import axios from 'axios'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {path:'/',name:'homeLink' ,component:Home},
-  {path:'/menu',name:'menuLink' ,component:Menu},
-  {path:'/about',name:'aboutLink' ,component:About,redirect:'/about/contact',children:[
-    {path:'/about/contact',name:"contactLink",component:Contact,children:[
-        {path:'/phone',name:'phoneNumber',component:Phone},
-        {path:'/personName',name:'personName',component:PersonName}
-    ]},
-    {path:'/delivery',name:"deliveryLink",component:Delivery},
-    {path:'/history',name:"historyLink",component:History},
-    {path:'/orderingGuide',name:"orderingGuideLink",component:OrderingGuide}
-  ]},
-  {path:'/admin',name:'adminLink' ,component:Admin},
-  {path:'/login',name:'loginLink' ,component:Login},
-  {path:'/register',name:'registerLink' ,component:Register},
-  {path:'*',redirect:'/'}
-]
+//配置默认根目录
+axios.defaults.baseURL = 'https://my-pizza-app-7f1dc.firebaseio.com/'
+
+Vue.prototype.http = axios;
 
 const router = new VueRouter({
   routes,
-  mode:'history'
+  mode:'history',
+  //控制路由滚动
+  scrollBehavior(to,from,savedPosition){
+    if(savedPosition){
+      return savedPosition
+    }else{
+      return {x:0,y:0}
+    }
+  }
 })
 
 new Vue({
@@ -51,3 +29,4 @@ new Vue({
   router,
   render: h => h(App)
 })
+
