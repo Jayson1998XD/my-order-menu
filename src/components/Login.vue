@@ -41,10 +41,17 @@ import axios from 'axios'
 export default {
   data(){
     return{
-      email:'',
-      password:'',
-    }
+      email:"",
+      password:""
+    };
   },
+    //组件内守卫
+    beforeRouteEnter: (to, from , next) => {
+      next(vm => {
+        vm.$store.dispatch("setUser", null);
+        vm.$store.dispatch("setLogin", false);
+      });
+    },
   methods:{
       onSubmit(){
         axios.get('users.json')
@@ -58,15 +65,21 @@ export default {
 
                 //实现过滤
                 let result = users.filter((user) =>{
-                  return user.email === this.email && user.password === 
-                  this.password
-                })
+                  return user.email === this.email && user.password ===  this.password;
+                });
 
                 //判断result是否大于0
                 if(result != null && result.length >0){
-                  this.$router.push({name:'homeLink'})
+                  // this.$router.push({name:'homeLink'})
+                  this.$store.dispatch("setUser",result[0].email);
+                  this.$router.push({name:'homeLink'});
+                  this.$store.dispatch("setLogin", true);
+                  localStorage.setItem("user", result[0].email);
                 }else{
-                  alert("邮箱或密码错误！")
+                  alert("邮箱或密码错误！");
+                  this.$store.dispatch("setUser",null);
+                  this.$store.dispatch("setLgoin",false);
+
                 }
               })
       }

@@ -2,9 +2,9 @@
   <div class="row">
     <div id="home" class="col-sm-12 text-center">
       <div class="background">
-        <h1>欢迎大家品尝pizza!</h1>
-        <h2>这里有你非常喜欢的pizza!</h2>
-        <button @click="goToMenu" class="btn btn-success">Let's order!</button>
+        <h1>真诚早餐专卖店</h1>
+        <h2>营养肠粉，好吃又实惠</h2>
+        <button @click="goToMenu" class="btn btn-success">开始点餐</button>
       </div>
     </div>
   </div>
@@ -32,7 +32,8 @@ export default {
 
 <style>
 #home{
-  background: url('../../src/assets/pizza.jpg');
+  background: url('../../src/assets/b1.jpg');
+  background-size: cover;
   height: 85vh;
   padding: 10%;
 }

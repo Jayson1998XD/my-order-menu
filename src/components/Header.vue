@@ -17,7 +17,7 @@
        <circle cx="12" cy="12" r="10"/>
        <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/></svg>
     </a>
-    <a href="/" class="navbar-brand">张大山的Pizza店</a>
+    <a href="/" class="navbar-brand">真诚早餐</a>
     <ul class="navbar-nav">
       <li>
           <router-link :to="{name:'homeLink'}" class="nav-link">主页</router-link>
@@ -35,27 +35,42 @@
 
     <ul class="navbar-nav ml-auto">
       <li>
-          <router-link :to="{name:'loginLink'}" v-show="!isLogin" class="nav-link">登录</router-link>
+          <router-link :to="{name:'loginLink'}" v-show="!isLogin"  class="nav-link">登录</router-link>
         </li>
 
-        <!-- <li class="nav-link">{{currentUser}}</li>
+        <li class="nav-link">{{currentUser}}</li>
         <li><router-link :to="{name:'loginLink'}" v-show="isLogin" class="nav-link" @click="loginOut">[退出]</router-link></li>
         <li>
-          <span v-show="isLogin" class="nav-link" @click="loginOut">[退出]</span>
-        </li> -->
+          <!-- <span v-show="isLogin" class="nav-link" @click="loginOut">[退出]</span> -->
+        </li>
 
         <li>
-          <router-link :to="{name:'registerLink'}" v-show="!isLogin" class="nav-link">注册</router-link>
+          <router-link :to="{name:'registerLink'}" v-show="!isLogin"  class="nav-link">注册</router-link>
         </li>
     </ul>
   </nav>
 </template>
 <script>
 export default {
-  // data(){
-  //   return {
-  //     homeLink:'/'
-  //   }
-  // }
+  data(){
+    return {
+
+    }
+  },
+  computed: {
+    currentUser(){
+      return this.$store.getters.currentUser;
+    },
+    isLogin(){
+      return this.$store.getters.isLogin;
+    }
+  },
+  methods: {
+    loginOut() {
+      localStorage.removeItem("user");
+      this.$store.dispatch("setLogin", false);
+      this.$store.dispatch("setUser", null);
+    }
+  }
 }
 </script>
