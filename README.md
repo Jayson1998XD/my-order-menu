@@ -1,6 +1,6 @@
 # my-pizza-app
 
-> A Vue.js project
+VUE全家桶入门项目（vue/vuex/router/axios/fetch/js）
 
 ## Build Setup
 
