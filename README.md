@@ -1,4 +1,4 @@
-# my-pizza-app
+# my-order-menu
 
 VUE全家桶入门项目（vue/vuex/router/axios/fetch/js）
 
